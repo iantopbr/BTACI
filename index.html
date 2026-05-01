@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    
+    <style>
+          @import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap');
+          body {
+              
+          }
+        
+        /* Apenas o necessário para a mecânica */
+        #menu {
+        z-index: 1000;
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-x: hidden;
+            transition: 0.5s;
+            border: 1px solid black;
+            background: rgb(50, 50, 50);
+            overflow-y: auto
+       }
+       
+        #menuu {
+        z-index: 10000;
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-x: hidden;
+            transition: 0.5s;
+            border: 1px solid black;
+            background: rgb(50, 50, 50);
+            text-align: center;
+            overflow-y: auto
+       }
+       #menuuu {
+        z-index: 9999;
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-x: hidden;
+            transition: 0.5s;
+            border: 1px solid black;
+            background: rgb(50, 50, 50);
+            text-align: center;
+            overflow-y: auto
+       }
+       
+       #menuuuu {
+        z-index: 9999;
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-x: hidden;
+            transition: 0.5s;
+            border: 1px solid black;
+            background: rgb(50, 50, 50);
+            text-align: center;
+            overflow-y: auto
+       }
+       
+          #menul {
+        z-index: 9999;
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-x: hidden;
+            transition: 0.5s;
+            border: 1px solid black;
+            background: rgb(50, 50, 50);
+            text-align: center;
+            overflow-y: auto
+       }
+       
+       #menull {
+        z-index: 9999;
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-x: hidden;
+            transition: 0.5s;
+            border: 1px solid black;
+            background: rgb(50, 50, 50);
+            text-align: center;
+            overflow-y: auto
+       }
+       
+       button {
+           color: blue;
+           background: white;
+           width: 250px;
+           height: 40px;
+           border: 1px solid blue;
+           border-bottom: 5px solid blue;
+           transition: 50ms;
+       }
+       
+       button:active {
+           transform: translateY(5px);
+           border-bottom: 1px solid blue;
+           color: white;
+           background: blue;
+       }
+       
+       
+    
+* {
+    font-family: "Oxygen";
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+    </style>
+</head>
+<body>
+    
+    <h1>Biblioteca de Texturas e Addons Criados por ian_topbr [BTACI]</h1>
+
+    <button onclick="abrir()">Menu</button><br><br>
+    
+    <h1>Texturas</h1>
+    <img src="gatadoian.jpg" width="80px" height="80px"><h2>Logo ian_topbr</h2>
+    <a dowload="logo ian_topbr.mcpack" href="logo ian_topbr.mcpack"><button>Baixar</button></a><br>
+    
+    <img src="gatadoian.jpg" width="80px" height="80px"><h2>Gata do ian_topbr para Quadros</h2>
+    <a dowload="gata do ian_topbr para quadros.mcpack.mcpack" href="gata do ian_topbr para quadros.mcpack"><button>Baixar</button></a><br><br>
+    
+    <h1>Quer Criar uma Textura?</h1>
+    <img src="texturesmaker.webp" width="80px" height="80px"><h2>Textures Maker</h2>
+    <a href="https://play.google.com/store/apps/details?id=co.pamobile.editor.pixelart.studio&pcampaignid=web_share"><button>Instalar</button></a>
+
+    <div id="menu">
+        <button onclick="fechar()">Fechar</button><br><br>
+        <button onclick="abrirr()">Sobre</button><br>
+        <button onclick="abrirrr()">Como Importar a Textura</button><br>
+        <button onclick="abrirrrr()">Descrever um Problema</button><br>
+        
+        <button onclick="abrirl()">Importar Textura [Novo!]</button><br>
+        
+        <button onclick="abrirll()">Registro de Atualizações</button><br>
+    </div>
+    
+    <div id="menuu">
+        <img src="gatadoian.jpg" alt="Foto de Perfil" width="80px" height="80px">
+        <h1 style="color: white;">ian_topbr</h1>
+        <h4 style="color: white;">ian_topbr, também Conhecido como MeninoDoPocket Criou este Site no Intuito de Exibir seus Próprios Projetos sem Precisar de Sites Externos.</h4>
+        <button onclick="fecharr()">Fechar</button><br><br>
+    </div>
+    
+    <div id="menuuu">
+       <h4 style="color: white;">1 - Verifique se a Textura foi Instalada<br><br>
+       2 - Clique duas Vezes na Textura e clique em Minecraft<br><br>
+       3 - Se Minecraft não aparece você precisa Instalar Cx Explorador de Arquivos<br><br>
+       4 - Conceda Acesso a Todos os Arquivos e Procure pela Textura<br><br>
+       5 - Clique Duas vezes na Textura e Clique em Minecraft</h4><br>
+       
+       <h1>👍</h1>
+        <button onclick="fecharrr()">Fechar</button><br><br>
+    </div>
+   
+   <div id="menuuuu" style="color: white;">
+       <h1>Descrever um Problema</h1>
+       <h4>É muito Importante Descrever quaisquer Problemas no Site. Isso nos Ajuda a manter o Site estável e Funcionando Corretamente</h4><br><br>
+       <form action="https://formsubmit.co/seuamigoian2@gmail.com" method="POST">
+    <label for="usuario">Usuário:</label>
+    <input type="text" id="usuario" name="usuario" required>
+
+    <br><br>
+
+    <label for="senha">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <br><br>
+
+    <label for="servico">Selecione seu Problema:</label>
+<select name="problema" required>
+    <option value="site">Site</option>
+    <option value="dowload">Dowload</option>
+    <option value="outro">Outro</option>
+</select>
+
+<textarea name="mensagem" placeholder="Descreva seu Problema" rows="10" cols="39" required></textarea>
+
+
+
+    <br><br>
+
+    <button type="submit">Confirmar Envio</button>
+</form>
+
+       
+       
+        <button onclick="fecharrrr()">Fechar</button><br><br>
+    </div>
+    
+    <div id="menul" style="color: white;">
+        <h1>Solicitar Publicação de Textura</h1>
+        <h4>Importe sua Textura aqui! Ela será Analisada e Verificada, se passar em todos os Processos sem Problemas, será Publicada na Próxima Atualização</h4><br><br>
+        
+        <form action="https://formsubmit.co/caixadeentradadoian@gmail.com" method="POST" enctype="multipart/form-data">
+    
+    <input type="hidden" name="_captcha" value="false">
+
+    <label for="nome">Nome:</label><br>
+    <input type="text" name="nome" id="nome" required>
+
+    <br><br>
+
+    <label for="email">E-mail:</label><br>
+    <input type="email" name="email" id="email" required>
+
+    <br><br>
+
+    <label for="arquivo">Arquivo de Importação: (Apenas .mcpack)</label><br>
+    <input type="file" name="arquivo" id="arquivo" accept=".mcpack" required>
+
+    <br><br>
+
+    <button type="submit">Solicitar Publicação de Textura</button>
+
+</form>
+
+       
+        <button onclick="fecharl()">Fechar</button><br><br>
+    </div>
+    
+     <div id="menull" style="color: white;">
+        <h1>0.1 [Esta Versão]</h1>
+        <h4>Adição de algumas Texturas, Menus, Funcionalidades</h4><br><br>
+        <h1>Publicado no Github</h1>
+       
+        <button onclick="fecharll()">Fechar</button><br><br>
+    </div>
+    
+
+    <script>
+        function abrir() {
+            document.getElementById("menu").style.width = "250px";
+        }
+        function abrirr() {
+            document.getElementById("menuu").style.width = "250px";        
+        }
+
+        function fechar() {
+            document.getElementById("menu").style.width = "0";
+        }
+        function fecharr() {
+            document.getElementById("menuu").style.width = "0";
+        }
+        
+        function abrirrr() {
+            document.getElementById("menuuu").style.width = "250px";        
+        }
+        function fecharrr() {
+            document.getElementById("menuuu").style.width = "0";
+        }
+        
+        function abrirrrr() {
+            document.getElementById("menuuuu").style.width = "250px";        
+        }
+        function fecharrrr() {
+            document.getElementById("menuuuu").style.width = "0";
+        }
+        
+        function abrirl() {
+            document.getElementById("menul").style.width = "250px";        
+        }
+        function fecharl() {
+            document.getElementById("menul").style.width = "0";
+        }
+        
+        function abrirll() {
+            document.getElementById("menull").style.width = "250px";        
+        }
+        function fecharll() {
+            document.getElementById("menull").style.width = "0";
+        }
+    </script>
+
+</body>
+</html>
+
+<h3 id="hh">O Site ainda está Carregando. Você pode Encontrar Erros</h3>
+
+<style>
+    #hh {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+    }
+</style>
+<script>
+    window.addEventListener('load', () => {
+        document.getElementById('hh').style.display = "none"
+    });
+</script>
