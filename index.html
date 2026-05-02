@@ -8,6 +8,12 @@
           body {
               
           }
+          
+          @media (max-width: 300px) {
+   button {
+        width: 100vw;
+    }
+}
         
         /* Apenas o necessário para a mecânica */
         #menu {
@@ -131,6 +137,7 @@
     <h1>Biblioteca de Texturas e Addons Criados por ian_topbr [BTACI]</h1>
 
     <button onclick="abrir()">Menu</button><br><br>
+    <button id="explosao">???</button>
     
     <h1>Texturas</h1>
     <img src="gatadoian.jpg" width="80px" height="80px"><h2>Logo ian_topbr</h2>
@@ -142,6 +149,54 @@
     <h1>Quer Criar uma Textura?</h1>
     <img src="texturesmaker.webp" width="80px" height="80px"><h2>Textures Maker</h2>
     <a href="https://play.google.com/store/apps/details?id=co.pamobile.editor.pixelart.studio&pcampaignid=web_share"><button>Instalar</button></a>
+    
+        <h1>Vídeos Interessantes</h1>
+    <div class="video-container">
+  <iframe class="iframeI" src="https://www.youtube.com/embed/fv6K-9Xtmlc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen>
+  </iframe>
+  
+   <iframe src="https://www.youtube.com/embed/JCX9ElEaz-A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen>
+  </iframe>
+</div>
+
+<style>
+      .video-container iframe {
+        width: 400px;
+        min-height: 200px;
+    }
+     
+     @media (min-width: 768px) {
+    .video-container iframe {
+        width: 500px;
+        min-height: 250px;
+    }
+}
+
+@media (max-width: 540px) {
+    .video-container {
+        text-align: center;
+    }
+}
+
+@media (max-width: 420px) {
+    .video-container iframe {
+        width: 300px;
+        min-height: 150px;
+    }
+}
+
+@media (max-width: 300px) {
+    .video-container iframe {
+        width: 200px;
+        min-height: 100px;
+    }
+    
+    button {
+        min-width: 100vw;
+    }
+}
+</style>
+
 
     <div id="menu">
         <button onclick="fechar()">Fechar</button><br><br>
@@ -239,8 +294,13 @@
     </div>
     
      <div id="menull" style="color: white;">
-        <h1>0.1 [Esta Versão]</h1>
+        <h1>0.1</h1>
         <h4>Adição de algumas Texturas, Menus, Funcionalidades</h4><br><br>
+        
+        <h1>0.2 Beta [Esta Versão]</h1>
+        <h4>Complementação de Vídeos e Maior Compatibilidade com Dispositivos Pequenos e Grandes</h4><br><br>
+        
+        
         <h1>Publicado no Github</h1>
        
         <button onclick="fecharll()">Fechar</button><br><br>
@@ -301,6 +361,7 @@
         position: fixed;
         bottom: 10px;
         left: 10px;
+        z-index: 9999;
     }
 </style>
 <script>
@@ -308,3 +369,71 @@
         document.getElementById('hh').style.display = "none"
     });
 </script>
+
+
+
+<div style="max-height: 2.6em; line-height: 1.3em; overflow-y: auto;" class="n">
+<h3 id="p"></h3>
+</div>
+
+<style>
+    @media (max-width: 500px) {
+    #p {
+        font-size: 0.8em;
+    }
+}
+
+ @media (min-width: 768px) {
+    #p {
+        font-size: 1.3em;
+    }
+}
+
+#p {
+    z-index: 9999;
+}
+
+</style>
+
+<audio src="explosao.mp3" id="audio"></audio>
+
+<script>
+const p = document.getElementById('p');
+
+function atualizarStatusRede() {
+    if (!navigator.connection) return;
+
+    const { downlink, effectiveType, rtt } = navigator.connection;
+    
+    // Criando a mensagem de log
+    
+    
+    // Lógica do seu Alerta (Menos de 1 Mbps)
+    if (downlink < 5) {
+    p.style.display = "block"
+       p.innerText = `Sua Conexão está Fraca, você pode ter Problemas com Carregamento Pesado. Velocidade da Conexão Gravada: ${downlink} Mbps`;
+       
+       
+       p.style.position = "fixed"
+       p.style.bottom = "40px"
+       p.style.left = "10px"
+        console.warn("Internet abaixo do limite!");
+    } else {
+        p.style.display = "none"
+    }
+
+    
+}
+
+// O segredo: esse evento dispara SOZINHO quando a net muda
+navigator.connection.addEventListener('change', atualizarStatusRede);
+
+// Chama uma vez ao carregar a página
+atualizarStatusRede();
+
+const explosao = document.getElementById('explosao');
+
+explosao.addEventListener('click', () => {
+    document.getElementById('audio').play()
+});
+        </script>
