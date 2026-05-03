@@ -148,7 +148,7 @@
     
     <h1>Quer Criar uma Textura?</h1>
     <img src="texturesmaker.webp" width="80px" height="80px"><h2>Textures Maker</h2>
-    <a href="https://play.google.com/store/apps/details?id=co.pamobile.editor.pixelart.studio&pcampaignid=web_share"><button>Instalar</button></a>
+    <a href="https://play.google.com/store/apps/details?id=co.pamobile.editor.pixelart.studio&pcampaignid=web_share"><button>Instalar</button></a><br><br><br><br>
     
         <h1>Vídeos Interessantes</h1>
     <div class="video-container">
@@ -157,7 +157,18 @@
   
    <iframe src="https://www.youtube.com/embed/JCX9ElEaz-A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen>
   </iframe>
-</div>
+  
+  <iframe src="https://www.youtube.com/embed/rut7Kckl3tk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen>
+  </iframe>
+  
+  <iframe src="https://www.youtube.com/embed/nto4DWgSI14" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen>
+  </iframe>
+</div><br><br>
+
+<h1>Remover Anúncios</h1>
+<h4>Tenha 5 Minutos Seguidos no Site (Sem Reiniciar a Página e sem Sair)</h4><br>
+
+<h2 id="hhhh"></h2>
 
 <style>
       .video-container iframe {
@@ -192,7 +203,11 @@
     }
     
     button {
-        min-width: 100vw;
+        min-width: 100%;
+    }
+    
+    #suggestionbutton {
+        
     }
 }
 </style>
@@ -297,9 +312,11 @@
         <h1>0.1</h1>
         <h4>Adição de algumas Texturas, Menus, Funcionalidades</h4><br><br>
         
-        <h1>0.2 Beta [Esta Versão]</h1>
+        <h1>0.2 Beta</h1>
         <h4>Complementação de Vídeos e Maior Compatibilidade com Dispositivos Pequenos e Grandes</h4><br><br>
         
+        <h1>0.2 [Esta Versão]</h1>
+        <h4>A Primeira Grande Atualização. Sistema de Notificações, Anúncios (Vídeos), pop-ups, Correções de Erros, mais Vídeos e outras Abas</h4><br><br>
         
         <h1>Publicado no Github</h1>
        
@@ -349,6 +366,39 @@
         function fecharll() {
             document.getElementById("menull").style.width = "0";
         }
+        
+        const hhhh = document.getElementById('hhhh');
+        
+        var minutosseguidos = 0
+        
+        setInterval(atualizar, 60000);
+        
+        function atualizar() {
+            minutosseguidos = minutosseguidos + 1
+            
+            hhhh.innerHTML = `${minutosseguidos}/5`
+            
+            if (minutosseguidos += 5) {hhhh.innerHTML = "Meta Concluída"
+     document.cookie = 'noads=yes'
+     }
+        }
+        
+        
+        
+        
+        
+        function getCookie(nome) {
+    const valor = `; ${document.cookie}`;
+    const partes = valor.split(`; ${nome}=`);
+    
+    if (partes.length === 2) {
+        return partes.pop().split(';').shift();
+    }
+}
+
+if (getCookie('noads') == "yes") {
+    hhhh.innerHTML = "Meta Concluída"
+}
     </script>
 
 </body>
@@ -436,4 +486,269 @@ const explosao = document.getElementById('explosao');
 explosao.addEventListener('click', () => {
     document.getElementById('audio').play()
 });
-        </script>
+</script>
+
+<div id="ad-popup" style="
+    position: fixed !important; 
+    top: 0px !important; 
+    right: -300px; 
+    /* A largura agora é dinâmica: 85% da tela, mas no máximo 180px */
+    width: 85vw !important; 
+    max-width: 180px !important; 
+    background: #000 !important; 
+    
+    box-shadow: 0 4px 15px rgba(0,0,0,0.8) !important; 
+    transition: right 0.5s ease !important; 
+    z-index: 9999999 !important; 
+    overflow: hidden !important; 
+    border: 1px solid #444 !important; 
+    padding: 0 !important; 
+    margin: 0 !important; 
+    box-sizing: border-box !important; 
+    line-height: 0 !important;
+    height: auto;
+">
+    
+    <button id="close-btn" onclick="fecharAd()" style="
+    display: none; 
+    position: absolute !important; 
+    top: 4px !important; 
+    right: 4px !important; 
+    /* TRAVAS ABSOLUTAS */
+    width: 22px !important; 
+    height: 22px !important; 
+    max-width: 22px !important; 
+    max-height: 22px !important; 
+    min-width: 22px !important; 
+    min-height: 22px !important;    
+    
+    background: #fff !important; 
+    color: #000 !important; 
+    border: none !important; 
+    border-radius: 50% !important; 
+    font-weight: bold !important; 
+    font-size: 12px !important; 
+    line-height: 22px !important; 
+    padding: 0 !important; 
+    margin: 0 !important;
+    z-index: 1005 !important; 
+    cursor: pointer !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+">×</button>
+
+    
+    <button id="mute-btn" onclick="toggleSom()" style="
+        all: unset !important;
+        position: absolute !important; 
+        bottom: 5px !important; 
+        left: 5px !important; 
+        /* Aqui está o segredo: ele ocupa 30% da largura da janela, limitado a 60px */
+        width: 30vw !important; 
+        max-width: 60px !important; 
+        height: 18px !important; 
+        box-sizing: border-box !important;
+        background: rgba(0,0,0,0.8) !important; 
+        color: #fff !important; 
+        border: 1px solid #fff !important; 
+        border-radius: 3px !important; 
+        font-size: 8px !important; 
+        font-family: Arial, sans-serif !important; 
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important; 
+        z-index: 1002 !important; 
+        cursor: pointer !important;
+        white-space: nowrap !important;
+    ">Som 🔇</button>
+
+    <div id="play-overlay" onclick="forcarPlay()" style="display: none; position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; background: rgba(0,0,0,0.8) !important; color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1001 !important; cursor: pointer !important;">
+        <span style="font-size: 20px !important;">▶</span>
+    </div>
+
+    <video id="video-player" muted playsinline style="
+        width: 100% !important; 
+        height: auto !important; 
+        max-height: 100vh;
+        
+        display: block !important; 
+        object-fit: contain !important; 
+        background: #000 !important;
+    ">
+        <source id="video-source" src="" type="video/mp4">
+    </video>
+</div>
+
+<script>
+    (function() {
+        const popup = document.getElementById('ad-popup');
+        const player = document.getElementById('video-player');
+        const source = document.getElementById('video-source');
+        const btnFechar = document.getElementById('close-btn');
+        const btnMute = document.getElementById('mute-btn');
+        const playOverlay = document.getElementById('play-overlay');
+
+        const listaVideos = [
+            "ads/1.mp4",
+            "ads/2.mp4"
+        ];
+
+        function mostrarAd() {
+            source.src = listaVideos[Math.floor(Math.random() * listaVideos.length)];
+            player.load();
+            player.muted = true;
+            btnMute.innerText = "Som 🔇";
+            btnFechar.style.display = 'none';
+            playOverlay.style.display = 'none';
+            popup.style.right = '10px';
+            player.play().catch(() => { playOverlay.style.display = 'flex'; });
+        }
+
+        window.forcarPlay = function() { player.play(); playOverlay.style.display = 'none'; };
+        window.toggleSom = function() {
+            player.muted = !player.muted;
+            btnMute.innerText = player.muted ? "Som 🔇" : "Som 🔊";
+        };
+        window.fecharAd = function() {
+            popup.style.right = '-350px';
+            player.pause();
+            setTimeout(mostrarAd, 120000);
+        };
+
+        player.onended = function() { btnFechar.style.display = 'block'; };
+        setTimeout(mostrarAd, 120000);
+    if (getCookie('noads') == "yes") {
+        popup.style.display = "none"
+    }
+    
+    })();
+    
+    
+    
+    
+    
+    
+    function getCookie(nome) {
+    const valor = `; ${document.cookie}`;
+    const partes = valor.split(`; ${nome}=`);
+    
+    if (partes.length === 2) {
+        return partes.pop().split(';').shift();
+    }
+}
+
+
+
+
+function deleteCookie(nome) {
+    // Definimos a data de expiração para 01 de Janeiro de 1970
+    document.cookie = nome + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';
+    console.log(`Comando de delete enviado para: ${nome}`);
+}
+
+// Exemplo de uso:
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="suggestion" style="border: 1px solid black; max-width: 200px; max-height: 250px; position: fixed; left: 10px; bottom: 10px; background: white; z-index: 9999999999999999; border-bottom: 3px solid black; overflow-y: auto;">
+        <h2>Ative as Notificações para ficar Sabendo de Todas as Atualizações!</h2><br>
+        
+        <button id="suggestionbutton" style="max-width: 199px;" >Fechar Sugestão</button>
+    </div>
+
+<!--notification script-->
+<script>
+    function getCookie(nome) {
+    const valor = `; ${document.cookie}`;
+    const partes = valor.split(`; ${nome}=`);
+    
+    if (partes.length === 2) {
+        return partes.pop().split(';').shift();
+    }
+}
+    
+    
+    async function agendarAtualizacao() {
+    // 1. Pedir permissão ao utilizador
+    const permissao = await window.Notification.requestPermission();
+    
+    if (permissao === 'granted') {
+        // 2. Registar o Service Worker (o ficheiro sw.js tem de existir na mesma pasta)
+        const registro = await navigator.serviceWorker.register('sw.js');
+        
+        document.cookie = "notificationpermissionenabled=yes"
+        
+        // 3. DEFINIR A DATA EXATA AQUI
+        // Formato: Ano-Mês-Dia T Hora:Minuto:Segundo
+        const dataDesejada = new Date('2026-05-03T14:35:00').getTime(); 
+        const agora = Date.now();
+
+        if (dataDesejada > agora) {
+            // Verifica se o navegador suporta o agendamento local (Trigger)
+            if ('showTrigger' in window.Notification.prototype) {
+                registro.showNotification("0.2 Chegou!", {
+                    body: "A Versão 0.2 Acabou de ser Lançada! Vários Recursos Novos foram Implementados e",
+                    icon: "gatadoian.jpg",
+                    // @ts-ignore - TimestampTrigger é novo, alguns editores marcam erro mas funciona
+                    showTrigger: new TimestampTrigger(dataDesejada)
+                });
+                console.log("Agendado para: " + new Date(dataDesejada).toLocaleString());
+            } else {
+                // Se o navegador não suportar agendamento nativo, fazemos um cálculo manual
+                const tempoDeEspera = dataDesejada - agora;
+                setTimeout(() => {
+                    registro.showNotification("0.2 Chegou!", {
+                        body: "A Versão 0.2 Acabou de ser Lançada! Vários Recursos Novos foram Implementados e"
+                    });
+                }, tempoDeEspera);
+                console.log("Agendamento via Timer (O site precisa de ficar aberto neste caso)");
+            }
+        } else {
+            console.log("A data escolhida já passou!");
+        }
+    }
+}
+
+agendarAtualizacao();
+
+const suggestion = document.getElementById('suggestion')
+
+const suggestionbutton = document.getElementById('suggestionbutton')
+
+if (getCookie('notificationpermissionenabled') == "yes") {
+    suggestion.style.display = "none"
+}
+
+else {
+    suggestion.style.display = "block"
+}
+
+suggestionbutton.addEventListener('click', () => {
+    suggestion.style.display = "none"
+});
+
+</script>
+
+
