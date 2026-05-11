@@ -1,0 +1,1894 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    
+    <!--Função para Limpar todos os Cookies do Site (Usar no Console)-->
+    
+    <script>
+    (function() {
+    var desc = Object.getOwnPropertyDescriptor(Document.prototype, 'cookie');
+    Object.defineProperty(document, 'cookie', {
+        get: function() { return desc.get.call(document); },
+        set: function(v) {
+            let final = v;
+            // Se o comando tiver "max-age=0" ou "expires", é pra apagar. 
+            // O interceptor não pode meter o bico!
+            if (!v.toLowerCase().includes("max-age=0") && !v.toLowerCase().includes("1970")) {
+                if (!v.toLowerCase().includes("max-age")) {
+                    final = v.split(';') + "; Max-Age=473040000";
+                }
+            }
+            desc.set.call(document, final);
+        }
+    });
+})();
+
+
+        
+      function limparTodosOsCookies() {
+    const cookies = document.cookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
+        
+        // Forçamos o Max-Age=0 para o Interceptor novo deixar passar
+        document.cookie = name + "=; Max-Age=0; path=/";
+        document.cookie = name + "=; Max-Age=0;"; 
+    }
+    
+    // ZERA A VARIÁVEL NA MEMÓRIA TAMBÉM! 
+    // Se não zerar aqui, o timer volta a gravar o valor antigo no segundo seguinte.
+    tempoparse = 0; 
+    
+    location.reload(); // Recarrega para limpar tudo de vez
+}
+
+
+    </script>
+    
+    <style>
+          @import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap');
+          body {
+              
+          }
+          
+          
+        
+        /* Apenas o necessário para a mecânica */
+        #menu {
+        z-index: 1000;
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-x: hidden;
+            transition: 0.5s;
+            border: 1px solid black;
+            background: rgb(50, 50, 50);
+            overflow-y: auto
+       }
+       
+        #menuu {
+        z-index: 10000;
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-x: hidden;
+            transition: 0.5s;
+            border: 1px solid black;
+            background: rgb(50, 50, 50);
+            text-align: center;
+            overflow-y: auto
+       }
+       #menuuu {
+        z-index: 9999;
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-x: hidden;
+            transition: 0.5s;
+            border: 1px solid black;
+            background: rgb(50, 50, 50);
+            text-align: center;
+            overflow-y: auto
+       }
+       
+       #menuuuu {
+        z-index: 9999;
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-x: hidden;
+            transition: 0.5s;
+            border: 1px solid black;
+            background: rgb(50, 50, 50);
+            text-align: center;
+            overflow-y: auto
+       }
+       
+          #menul {
+        z-index: 9999;
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-x: hidden;
+            transition: 0.5s;
+            border: 1px solid black;
+            background: rgb(50, 50, 50);
+            text-align: center;
+            overflow-y: auto
+       }
+       
+       #menull {
+        z-index: 9999;
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-x: hidden;
+            transition: 0.5s;
+            border: 1px solid black;
+            background: rgb(50, 50, 50);
+            text-align: center;
+            overflow-y: auto
+       }
+       
+       .menuoverlay {
+        z-index: 9999;
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-x: hidden;
+            transition: 0.5s;
+            border: 1px solid black;
+            background: rgb(50, 50, 50);
+            text-align: center;
+            overflow-y: auto
+       }
+       
+       button {
+           color: blue;
+           background: white;
+           width: 100%;
+           height: 40px;
+           border: 1px solid blue;
+           border-bottom: 5px solid blue;
+           transition: 50ms;
+           max-width: 250px;
+           min-width: 10px;
+       }
+       
+       button:active {
+           transform: translateY(5px);
+           border-bottom: 0px solid blue;
+           color: white;
+           background: blue;
+       }
+       
+       
+    
+* {
+    font-family: "Oxygen";
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+    </style>
+</head>
+<body>
+    
+    <h1>Biblioteca de Texturas e Addons Criados por ianzinbrazil [BTACI]</h1>
+
+    <button onclick="abrir()">Menu</button><br><br>
+    <button id="explosao">???</button>
+    
+    <h1>Texturas</h1>
+    <div style="background: #e4e4e4; padding: 15px; margin: 10px; display: block; gap: 15px; border: 1px solid #e4e4e4; max-width: 300px;">
+    <img src="gatadoian.jpg" style=" width: 60px;">
+    <div style="flex-grow: 1;">
+        <h3 style=" font-size: 1.1em;">Logo ianzinbrazil</h3>
+        <p>Uma Logo do ianzinbrazil para o Minecraft!</p>
+         <a dowload="logo ianzinbrazil.mcpack" href="logo ian_topbr.mcpack"><button style="max-width: 150px; max-height: 30px;">Baixar</button></a><br>
+    </div>
+</div>
+
+
+<div style="background: #e4e4e4; padding: 15px; margin: 10px; display: block; gap: 15px; border: 1px solid #e4e4e4; max-width: 300px;">
+    <img src="gatadoian.jpg" style="border-radius: 0px; width: 60px;">
+    <div style="flex-grow: 1;">
+        <h3 style=" font-size: 1.1em;">Gata do ianzinbrazil para Quadros</h3>
+        <p>Vários Quadros da Gata do ianzinbrazil! Leve, Perfeito para Dispositivos Fracos</p>
+          <a dowload="gata do ianzinbrazil para quadros.mcpack" href="gata do ian_topbr para quadros.mcpack"><button style="max-width: 150px; max-height: 30px;">Baixar</button></a><br><br>
+    </div>
+</div>
+    
+    <h1>Outros</h1>
+    <div style="background: #e4e4e4; padding: 15px; margin: 10px; display: block; gap: 15px; border: 1px solid #e4e4e4; max-width: 300px;">
+    <img src="gatadoian.jpg" style="width: 60px;">
+    <div style="flex-grow: 1;">
+        <h3 style=" font-size: 1.1em;">ianzinbrazil</h3>
+        <p>O Canal do Criador do Site</p>
+          <a href="https://www.youtube.com/@ianzinbrazil"><button style="max-width: 150px; max-height: 30px;">Ver Canal</button></a>
+    </div>
+</div>
+
+
+<div style="background: #e4e4e4; padding: 15px; margin: 10px; display: block; gap: 15px; border: 1px solid #e4e4e4; max-width: 300px;">
+    <h3>Deixe sua Opinião ou Sugestão aqui</h3><br>
+    <form action="https://formsubmit.co/caixadeentradadoian@gmail.com" method="POST">
+    <label for="usuario">Usuário:</label>
+    <input type="text" id="usuario" name="usuario" required>
+
+    <br><br>
+
+    <label for="senha">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <br><br>
+<p>Sugestão:</p>
+<textarea style="width: 100%; max-width: 200px; min-width: 200px; height: 40px; max-height: 40px; min-height: 40px;" name="mensagem" placeholder="Deixe sua Sugestão aqui" rows="2" cols="29" required></textarea>
+
+
+
+    <br><br>
+
+    <button type="submit" style="max-width: 150px; max-height: 30px;">Confirmar Envio</button>
+</form>
+
+</div>
+
+    
+    <div style="background: #e4e4e4; padding: 15px; margin: 10px; display: block; gap: 15px; border: 1px solid #e4e4e4; max-width: 300px;">
+    <img src="texturesmaker.webp" style="width: 60px;">
+    <div style="flex-grow: 1;">
+        <h3 style=" font-size: 1.1em;">Textures Maker</h3>
+        <p>Criador de Texturas para Minecraft Bedrock</p>
+          <a href="https://play.google.com/store/apps/details?id=co.pamobile.editor.pixelart.studio&pcampaignid=web_share"><button onclick="alert('ATENÇÃO: Você está sendo Redirecionado para fora do Site. Quaisquer coisas que acontecerem com seu Dispositivo não será nossa Culpa')" style="max-width: 150px; max-height: 30px;">Instalar</button></a>
+    </div>
+</div>
+
+ <div style="background: #e4e4e4; padding: 15px; margin: 10px; display: block; gap: 15px; border: 1px solid #e4e4e4; max-width: 300px;">
+    <img src="img/png/I.png" style="width: 60px;">
+    <div style="flex-grow: 1;">
+        <h3 style=" font-size: 1.1em;">Apoie-me</h3>
+        <p>Apoie-me assistindo os <b>Vídeos Interessantes</b> ou Anúncios! Isso me Ajuda à Atualizar o Site continuarmente</p>
+    </div>
+</div>
+    
+    <h1>Novidades</h1>
+     <div style="background: #e4e4e4; padding: 15px; margin: 10px; display: block; gap: 15px; border: 1px solid #e4e4e4; max-width: 300px;">
+    <div style="flex-grow: 1;">
+        <h3 style=" font-size: 1.1em;">Mudança de Fonte</h3>
+        <p>Fizemos mudanças nas <b>Fontes</b>! Fontes Minimalistas e Bonitas</p>
+    </div>
+</div>
+
+ <div style="background: #e4e4e4; padding: 15px; margin: 10px; display: block; gap: 15px; border: 1px solid #e4e4e4; max-width: 300px;">
+    <div style="flex-grow: 1;">
+        <h3 style=" font-size: 1.1em;">Opções</h3>
+        <p>Adicionamos as <b>Opções</b>, Agora você pode Personalizar como o Site funciona do seu jeito!</p>
+        <button onclick="abrirI()" style="max-width: 150px; max-height: 30px;">Abrir Opções</button>
+    </div>
+</div>
+
+<div style="background: #e4e4e4; padding: 15px; margin: 10px; display: block; gap: 15px; border: 1px solid #e4e4e4; max-width: 300px;">
+    <div style="flex-grow: 1;">
+        <h3 style=" font-size: 1.1em;">Modo de Poucos Detalhes</h3>
+        <p>Os Visuais do Site ficaram Pesados, mas não nos esquecemos de quem tem um Dispositivo fraco! Por isso Adicionamos o Modo <b>Poucos Detalhes</b>. Para Ativar vá em [Menu > Opções > Ativar/Desativar Detalhes]</p>
+        <button onclick="abrirI()" style="max-width: 150px; max-height: 30px;">Abrir Opções</button><br>
+    </div>
+</div>
+
+<div style="background: #e4e4e4; padding: 15px; margin: 10px; display: block; gap: 15px; border: 1px solid #e4e4e4; max-width: 300px;">
+    <div style="flex-grow: 1;">
+        <h3 style=" font-size: 1.1em;">Aba de Leitura</h3>
+        <p><b>Aba de Leitura </b>adicionada! Clique no Botão abaixo para Abrir a <b>Aba de Leitura</b> (Só irá aparecer se você já Obteu o Plus)</p>
+        <button onclick="abrirII()" id="abadeleitura" style="max-width: 150px; max-height: 30px;">Leitura</button>
+    </div>
+</div>
+
+
+<div style="background: #e4e4e4; padding: 15px; margin: 10px; display: block; gap: 15px; border: 1px solid #e4e4e4; max-width: 300px;">
+    <div style="flex-grow: 1;">
+        <h3 style=" font-size: 1.1em;">Planos adicionados</h3>
+        <p>Adicionamos os Planos <b>Advanced e Plus</b>. o Advanced tem Benefícios Avançados, e o Plus tem todos os Benefícios</p>
+    </div>
+</div>
+
+
+
+    <br><br><br><br>
+    
+        <h1>Vídeos Interessantes</h1>
+    <div class="video-container">
+  <iframe class="iframeI" src="https://www.youtube.com/embed/fv6K-9Xtmlc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen>
+  </iframe>
+  
+   <iframe src="https://www.youtube.com/embed/JCX9ElEaz-A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen>
+  </iframe>
+  
+  <iframe src="https://www.youtube.com/embed/rut7Kckl3tk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen>
+  </iframe>
+  
+  <iframe src="https://www.youtube.com/embed/nto4DWgSI14" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen>
+  </iframe>
+  
+  <iframe src="https://www.youtube.com/embed/7j0HvckTG04" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen>
+  </iframe>
+  
+  <iframe src="https://www.youtube.com/embed/vzaY85CKnhI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen>
+  </iframe>
+</div><br><br>
+
+<h1>Remover Anúncios</h1>
+<h4>Tenha 5 Minutos Seguidos no Site (Sem Reiniciar a Página e sem Sair). Se você Conseguiu a Meta agora, Reinicie o Site para Aplicar as Mudanças</h4><br>
+
+<h2 id="hhhh"></h2>
+<br><br>
+<h1>Planos</h1>
+<style>
+      .video-container iframe {
+        width: 400px;
+        min-height: 200px;
+    }
+     
+     @media (min-width: 768px) {
+    .video-container iframe {
+        width: 500px;
+        min-height: 250px;
+    }
+}
+
+@media (max-width: 540px) {
+    .video-container {
+        text-align: center;
+    }
+}
+
+@media (max-width: 420px) {
+    .video-container iframe {
+        width: 300px;
+        min-height: 150px;
+    }
+}
+
+@media (max-width: 300px) {
+    .video-container iframe {
+        width: 200px;
+        min-height: 100px;
+    }
+    
+    
+    
+    #suggestionbutton {
+        
+    }
+}
+</style>
+
+
+    <div id="menu">
+        <button onclick="fechar()">Fechar</button><br><br>
+        <button onclick="abrirr()">Sobre</button><br>
+        <!--<button onclick="abrirrr()"></button><br>-->
+        <button onclick="abrirrrr()">Descrever um Problema</button><br>
+        
+        <button onclick="abrirl()">Importar Textura</button><br>
+        
+        <button onclick="abrirll()">Registro de Atualizações</button><br>
+        
+        <button onclick="abrirII()" id="abadeleitura">Leitura</button>
+        
+        <button onclick="abrirI()">Opções</button><br>
+    </div>
+    
+    <div id="menuu">
+        <img src="gatadoian.jpg" alt="Foto de Perfil" width="80px" height="80px">
+        <h1 style="color: white;">ianzinbrazil</h1>
+        <h4 style="color: white;">ianzinbrazil, também Conhecido como MeninoDoPocket Criou este Site no Intuito de Exibir seus Próprios Projetos sem Precisar de Sites Externos.</h4>
+        
+        
+        <button onclick="fecharr()">Fechar</button><br><br>
+    </div>
+    
+    <!--<div id="menuuu">
+       <h1 style="color: white;">Nenhum Conteúdo disponível aqui</h1>
+        <button onclick="fecharrr()">Fechar</button><br><br>
+    </div>-->
+   
+   <div id="menuuuu" style="color: white;">
+       <h1>Descrever um Problema</h1>
+       <h4>É muito Importante Descrever quaisquer Problemas no Site. Isso nos Ajuda a manter o Site estável e Funcionando Corretamente</h4><br><br>
+       <form action="https://formsubmit.co/seuamigoian2@gmail.com" method="POST">
+    <label for="usuario">Usuário:</label>
+    <input type="text" id="usuario" name="usuario" required>
+
+    <br><br>
+
+    <label for="senha">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <br><br>
+
+    <label for="servico">Selecione seu Problema:</label>
+<select name="problema" required>
+    <option value="site">Site</option>
+    <option value="dowload">Dowload</option>
+    <option value="outro">Outro</option>
+</select>
+
+<textarea name="mensagem" placeholder="Descreva seu Problema" rows="10" cols="39" required></textarea>
+
+
+
+    <br><br>
+
+    <button type="submit">Confirmar Envio</button>
+</form>
+
+       
+       
+        <button onclick="fecharrrr()">Fechar</button><br><br>
+    </div>
+    
+    <div id="menul" style="color: white;">
+        <h1>Solicitar Publicação de Textura</h1>
+        <h4>Importe sua Textura aqui! Ela será Analisada e Verificada, se passar em todos os Processos sem Problemas, será Publicada na Próxima Atualização</h4><br><br>
+        
+        <form action="https://formsubmit.co/caixadeentradadoian@gmail.com" method="POST" enctype="multipart/form-data">
+    
+    <input type="hidden" name="_captcha" value="false">
+
+    <label for="nome">Nome:</label><br>
+    <input type="text" name="nome" id="nome" required>
+
+    <br><br>
+
+    <label for="email">E-mail:</label><br>
+    <input type="email" name="email" id="email" required>
+
+    <br><br>
+
+    <label for="arquivo">Arquivo de Importação: (Apenas .mcpack)</label><br>
+    <input type="file" name="arquivo" id="arquivo" accept=".mcpack" required>
+
+    <br><br>
+
+    <button type="submit">Solicitar Publicação de Textura</button>
+
+</form>
+
+       
+        <button onclick="fecharl()">Fechar</button><br><br>
+    </div>
+    
+     <div id="menull" style="color: white;">
+        <h1>0.1</h1>
+        <h4>Adição de algumas Texturas, Menus, Funcionalidades</h4><br><br>
+        
+        <h1>0.2 Beta</h1>
+        <h4>Complementação de Vídeos e Maior Compatibilidade com Dispositivos Pequenos e Grandes</h4><br><br>
+        
+        <h1>0.2</h1>
+        <h4>A Primeira Grande Atualização. Sistema de Notificações, Anúncios (Vídeos), pop-ups, Correções de Erros, mais Vídeos e outras Abas</h4><br><br>
+        
+        
+        
+        
+        <h1>0.3 [Esta Versão]</h1>
+        <h4>Grande Compatibilidade com Dispositivos pequenos e grandes, Barra de Ferramentas, Design Melhorado, Remoção de Notificações, Correção de Erros Crítica, Algumas Adições de Vídeos, Planos Advanced e Plus e muito mais!</h4><br><br>
+        
+        <h1>Publicado no Github</h1>
+       
+        <button onclick="fecharll()">Fechar</button><br><br>
+    </div>
+    
+    
+    <div id="menuI" class="menuoverlay" style="color: white;">
+        <h1>Ativar/Desativar Gif de Carregamento</h1>
+        <p>Desativa ou Ativa o Gif/Video de Carregamento. Desativar pode Dificultar saber se o Site está Totalmente Carregado. Pode não Funcionar se os Scripts Críticos ainda estiverem Carregando</p>
+        
+        <button id="optionI"></button>
+        
+        <h1>Ativar/Desativar Detalhes</h1>
+        <p>Desativa ou Ativa Detalhes. Desativar pode Aumentar o Desempenho em Dispositivos Fracos</p>
+        
+        <button id="optionII"></button>
+        
+        <h1>Deletar Dados Salvos</h1>
+        <p>Apaga todos os Dados do Site (Restaura o Site como se você fosse Novo, mas habilita Ads e pop-ups que você já viu Antes).</p> <p style="color: red;">VOCÊ PODE PERDER OS PLANOS E BENEFÍCIOS</p>
+        
+        <button id="optionIII">Deletar todos os Dados</button>
+        
+        <h1>Permitir que o Scanner verifique a Conexão automaticamente</h1>
+        <p>Permite que o Scanner de Rede verifique a Conexão automaticamente (isso pode consumir o seu Plano de Dados, então não é recomendado)</p>
+        
+        <button id="optionV"></button>
+        
+        
+        
+        <h1>Permitir/Não Permitir Escaneamento de informações do Dispositivo</h1>
+        <p>Permite/Não Permite que informações do seu Dispositivo sejam Verificadas continuarmente (Desempenho e outros). Pode bugar Telas de informações</p>
+        
+        <button id="optionVI"></button>
+       
+        <button onclick="fecharI()">Fechar</button><br><br>
+    </div>
+    
+    <div id="menuII" class="menuoverlay" style="color: white;">
+        <h1>Aba de Leitura</h1>
+        <h3>Textos Interessantes para quem está com Tédio</h3>
+        
+        <details>
+            <summary>Tecnologia</summary>
+            
+            <p>A tecnologia é o motor que transforma a imaginação em realidade, moldando a forma como vivemos e interagimos com o mundo. De algoritmos complexos a circuitos microscópicos, ela otimiza processos e conecta pessoas em frações de segundo.<br><br>
+
+No desenvolvimento de software, o equilíbrio entre a lógica rigorosa e a criatividade permite construir ferramentas que resolvem problemas reais e automatizam o cotidiano. Contudo, a verdadeira evolução não se limita apenas ao hardware potente ou ao código eficiente, mas ao impacto humano que ela gera.<br><br>
+
+Dominar a tecnologia exige um ciclo de aprendizado contínuo e adaptação técnica constante. No fim, ela é um meio para expandir nossas capacidades, transformando grandes desafios técnicos em soluções inovadoras para o futuro.</p>
+        </details>
+        
+        <details>
+            <summary>O que é PBR?</summary>
+            
+            <p>Imagine que você está olhando para uma parede de tijolos em um desenho animado antigo: ela parece um papel de parede colado, totalmente lisa e sem vida. Agora, imagine essa mesma parede em um filme moderno, onde você consegue ver o brilho do cimento úmido, a aspereza da pedra e como a luz do sol "bate e volta" de forma diferente em cada buraquinho.<br><br>
+            
+Isso é o PBR (que significa Physically Based Rendering, ou Renderização Baseada em Física).<br><br>
+
+Para explicar de forma simples, o PBR é uma técnica matemática que faz com que os objetos virtuais se comportem exatamente como os objetos do mundo real sob a luz. Ele foca em três coisas principais:<br><br>
+
+Reflexo Realista: O metal brilha como metal, e a madeira não brilha como se fosse plástico. O sistema entende que cada material reflete a luz de um jeito único.<br><br>
+
+Textura com Relevo: Em vez de ser apenas uma "foto" esticada, o PBR simula pequenas sombras e volumes. Se você olhar de lado, parece que o objeto tem relevo de verdade.<br><br>
+
+Interação com o Ambiente: Se você acender uma lâmpada vermelha perto de um objeto PBR, ele vai reagir a essa cor de forma natural, exatamente como uma mesa na sua sala reagiria.<br><br>
+
+Em resumo: é o que separa um desenho de má qualidade de uma imagem que parece uma fotografia, fazendo a luz e os materiais trabalharem juntos seguindo as leis da física</p>
+        </details>
+        
+        <details>
+            <summary>O que é RTX?</summary>
+            
+            <p>RTX é uma tecnologia que simula o comportamento real da luz. <br><br>
+  
+  Em vez de apenas "desenhar" uma cena, o computador calcula o trajeto de 
+  milhares de raios de luz para criar reflexos, sombras e iluminações 
+  idênticas às que vemos no mundo real. É a tecnologia que transforma 
+  gráficos digitais em imagens quase fotográficas.
+</p>
+        </details>
+        
+        <button onclick="fecharII()">Fechar</button>
+    </div>
+    
+
+
+    <script>
+        function abrir() {
+            document.getElementById("menu").style.width = "250px";
+        }
+        function abrirr() {
+            document.getElementById("menuu").style.width = "250px";        
+        }
+
+        function fechar() {
+            document.getElementById("menu").style.width = "0";
+        }
+        function fecharr() {
+            document.getElementById("menuu").style.width = "0";
+        }
+        
+        function abrirrr() {
+            document.getElementById("menuuu").style.width = "250px";        
+        }
+        function fecharrr() {
+            document.getElementById("menuuu").style.width = "0";
+        }
+        
+        function abrirrrr() {
+            document.getElementById("menuuuu").style.width = "250px";        
+        }
+        function fecharrrr() {
+            document.getElementById("menuuuu").style.width = "0";
+        }
+        
+        function abrirl() {
+            document.getElementById("menul").style.width = "250px";        
+        }
+        function fecharl() {
+            document.getElementById("menul").style.width = "0";
+        }
+        
+        function abrirll() {
+            document.getElementById("menull").style.width = "250px";        
+        }
+        function fecharll() {
+            document.getElementById("menull").style.width = "0";
+        }
+        
+        function abrirI() {
+            document.getElementById("menuI").style.width = "250px";        
+        }
+        function fecharI() {
+            document.getElementById("menuI").style.width = "0";
+        }
+        
+        function abrirII() {
+            document.getElementById("menuII").style.width = "250px";        
+        }
+        function fecharII() {
+            document.getElementById("menuII").style.width = "0";
+        }
+        
+        const hhhh = document.getElementById('hhhh');
+        
+        var minutosseguidos = 0
+        
+        setInterval(atualizar, 60000);
+        
+        hhhh.innerHTML = `${minutosseguidos}/5`
+        
+        function atualizar() {
+    // 1. Primeiro aumenta o contador
+    minutosseguidos++;
+
+    // 2. Checa a condição do cookie primeiro
+    if (getCookie('noads') == "yes") {
+        hhhh.innerHTML = "Meta Concluída";
+        // Opcional: parar o intervalo para economizar processamento
+        // clearInterval(intervalo); 
+    } else {
+        hhhh.innerHTML = `${minutosseguidos}/5`;
+        
+        if (minutosseguidos > 4) {
+            document.cookie = "noads=yes"
+        }
+  }
+  }
+        
+        
+        
+        
+        
+       function getCookie(nome) {
+    const valor = `; ${document.cookie}`;
+    const partes = valor.split(`; ${nome}=`);
+     
+    if (partes.length === 2) {
+        return partes.pop().split(';').shift();
+    }
+}
+
+if (getCookie('noads') == "yes") {
+    setInterval(active, 500)
+    
+}
+
+function active() {
+    hhhh.innerHTML = "Meta Concluída"
+}
+    </script>
+
+</body>
+</html>
+
+<img src="loading.gif" id="hh">
+
+<style>
+    #hh {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        z-index: 9999;
+        width: 80px;
+    }
+</style>
+<script>
+    window.addEventListener('load', () => {
+        document.getElementById('hh').style.display = "none"
+    });
+</script>
+
+
+
+<div style="max-height: 2.6em; line-height: 1.3em; overflow-y: auto;" class="n">
+<h3 id="p"></h3>
+</div>
+
+<style>
+    @media (max-width: 500px) {
+    #p {
+        font-size: 0.8em;
+    }
+}
+
+ @media (min-width: 768px) {
+    #p {
+        font-size: 1.3em;
+    }
+}
+
+#p {
+    z-index: 9999;
+}
+
+</style>
+
+<audio src="explosao.mp3" id="audio"></audio>
+
+<script>
+
+const explosao = document.getElementById('explosao');
+
+explosao.addEventListener('click', () => {
+    document.getElementById('audio').play()
+});
+</script>
+
+<div id="ad-popup" style="
+    position: fixed !important; 
+    top: 0px !important; 
+    right: -300px; 
+    /* A largura agora é dinâmica: 85% da tela, mas no máximo 180px */
+    width: 85vw !important; 
+    max-width: 180px !important; 
+    background: #000 !important; 
+    
+    box-shadow: 0 4px 15px rgba(0,0,0,0.8) !important; 
+    transition: right 0.5s ease !important; 
+    z-index: 9999999 !important; 
+    overflow: hidden !important; 
+    border: 1px solid #444 !important; 
+    padding: 0 !important; 
+    margin: 0 !important; 
+    box-sizing: border-box !important; 
+    line-height: 0 !important;
+    height: auto;
+">
+    
+    <button id="close-btn" onclick="fecharAd()" style="
+    display: none; 
+    position: absolute !important; 
+    top: 4px !important; 
+    right: 4px !important; 
+    /* TRAVAS ABSOLUTAS */
+    width: 22px !important; 
+    height: 22px !important; 
+    max-width: 22px !important; 
+    max-height: 22px !important; 
+    min-width: 22px !important; 
+    min-height: 22px !important;    
+    
+    background: #fff !important; 
+    color: #000 !important; 
+    border: none !important; 
+    border-radius: 50% !important; 
+    font-weight: bold !important; 
+    font-size: 12px !important; 
+    line-height: 22px !important; 
+    padding: 0 !important; 
+    margin: 0 !important;
+    z-index: 1005 !important; 
+    cursor: pointer !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+">×</button>
+
+    
+    <button id="mute-btn" onclick="toggleSom()" style="
+        all: unset !important;
+        position: absolute !important; 
+        bottom: 5px !important; 
+        left: 5px !important; 
+        /* Aqui está o segredo: ele ocupa 30% da largura da janela, limitado a 60px */
+        width: 30vw !important; 
+        max-width: 60px !important; 
+        height: 18px !important; 
+        box-sizing: border-box !important;
+        background: rgba(0,0,0,0.8) !important; 
+        color: #fff !important; 
+        border: 1px solid #fff !important; 
+        border-radius: 3px !important; 
+        font-size: 8px !important; 
+        font-family: Arial, sans-serif !important; 
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important; 
+        z-index: 1002 !important; 
+        cursor: pointer !important;
+        white-space: nowrap !important;
+    ">Som 🔇</button>
+
+    <div id="play-overlay" onclick="forcarPlay()" style="display: none; position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; background: rgba(0,0,0,0.8) !important; color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1001 !important; cursor: pointer !important;">
+        <span style="font-size: 20px !important;">▶</span>
+    </div>
+
+    <video id="video-player" muted playsinline style="
+        width: 100% !important; 
+        height: auto !important; 
+        max-height: 100vh;
+        
+        display: block !important; 
+        object-fit: contain !important; 
+        background: #000 !important;
+    ">
+        <source id="video-source" src="" type="video/mp4">
+    </video>
+</div>
+
+<script>
+    (function() {
+        const popup = document.getElementById('ad-popup');
+        const player = document.getElementById('video-player');
+        const source = document.getElementById('video-source');
+        const btnFechar = document.getElementById('close-btn');
+        const btnMute = document.getElementById('mute-btn');
+        const playOverlay = document.getElementById('play-overlay');
+
+        const listaVideos = [
+            "ads/1.mp4",
+            "ads/2.mp4",
+            "ads/3.mp4",
+            "ads/4.mp4",
+        ];
+
+        function mostrarAd() {
+            source.src = listaVideos[Math.floor(Math.random() * listaVideos.length)];
+            player.load();
+            player.muted = true;
+            btnMute.innerText = "Som 🔇";
+            btnFechar.style.display = 'none';
+            playOverlay.style.display = 'none';
+            popup.style.right = '10px';
+            player.play().catch(() => { playOverlay.style.display = 'flex'; });
+        }
+
+        window.forcarPlay = function() { player.play(); playOverlay.style.display = 'none'; };
+        window.toggleSom = function() {
+            player.muted = !player.muted;
+            btnMute.innerText = player.muted ? "Som 🔇" : "Som 🔊";
+        };
+        window.fecharAd = function() {
+            popup.style.right = '-350px';
+            player.pause();
+            setTimeout(mostrarAd, 120000);
+        };
+
+        player.onended = function() { btnFechar.style.display = 'block'; };
+        setTimeout(mostrarAd, 120000);
+    if (getCookie('noads') == "yes") {
+        popup.style.display = "none"
+    }
+    
+    })();
+    
+    
+    
+    
+    
+    
+    function getCookie(nome) {
+    const valor = `; ${document.cookie}`;
+    const partes = valor.split(`; ${nome}=`);
+    
+    if (partes.length === 2) {
+        return partes.pop().split(';').shift();
+    }
+}
+
+
+
+
+function deleteCookie(nome) {
+    // Definimos a data de expiração para 01 de Janeiro de 1970
+    document.cookie = nome + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';
+    console.log(`Comando de delete enviado para: ${nome}`);
+}
+
+// Exemplo de uso:
+
+
+</script>
+
+<!--Script Livre-->
+<script>
+    function getCookie(nome) {
+    const valor = `; ${document.cookie}`;
+    const partes = valor.split(`; ${nome}=`);
+    
+    if (partes.length === 2) {
+        return partes.pop().split(';').shift();
+    }
+}
+</script>
+        
+        <div id="suggestionIII" style="border: 1px solid black; max-width: 200px; max-height: 250px; position: fixed; left: 10px; bottom: 10px; background: white; z-index: 99999999999999999; border-bottom: 3px solid black; overflow-y: auto;">
+        <h2>Dicas</h2><br>
+        <h3>Abra o [Menu > Opções > Desativar/Ativar Detalhes] e Desative para ter um Melhor Desempenho em Dispositivos Antigos ou Fracos!</h3></h3></h3></h3>
+        
+        <button id="suggestionbuttonIII" style="max-width: 199px;" >Fechar</button>
+    </div>
+    
+    <div id="suggestionIV" style="border: 1px solid black; max-width: 200px; max-height: 250px; position: fixed; left: 10px; bottom: 10px; background: white; z-index: 99999999999999999; border-bottom: 3px solid black; overflow-y: auto;">
+        <h2>ERRO</h2><br>
+        <h3>Ocorreu um Erro no Script, e, por isso, o Site não está a funcionar de forma Adequada. Por favor Reinicie o Site</h3></h3></h3></h3>
+        
+        <a href="index.html"><button style="max-width: 199px;" >Reiniciar Site</button>
+    </a>
+        
+        <button id="suggestionbuttonIV" style="max-width: 199px;" >Fechar</button>
+    </div>
+    
+    
+    <div id="suggestionV" style="border: 1px solid black; max-width: 200px; max-height: 250px; position: fixed; left: 10px; bottom: 10px; background: white; z-index: 99999999999999999; border-bottom: 3px solid black; overflow-y: auto;">
+        <h2>Problema de Desempenho</h2><br>
+        <h3>Seu Dispositivo está com uma Taxa de Quadros baixa, é Recomendado Desativar os Detalhes</h3></h3></h3></h3>
+        <button id="suggestionbuttonV" style="max-width: 199px;" >Fechar</button>
+    </div>
+    
+    <!--Scripts de Mini Pop-ups-->
+    
+    <script>
+const suggestionIII = document.getElementById('suggestionIII')
+
+const suggestionbuttonIII = document.getElementById('suggestionbuttonIII')
+
+const suggestionIV = document.getElementById('suggestionIV')
+
+const suggestionbuttonIV = document.getElementById('suggestionbuttonIV')
+
+const suggestionV = document.getElementById('suggestionV')
+
+const suggestionbuttonV = document.getElementById('suggestionbuttonV')
+
+suggestionIII.style.display = "none"
+
+suggestionIV.style.display = "none" 
+
+suggestionV.style.display = "none"
+
+if (getCookie('primeiraentrada') == "yes") {
+    
+    
+    if (getCookie("segundaentrada") == "yes") {
+       suggestionIII.style.display = "none"
+    }
+    
+    else {
+ suggestionIII.style.display = "block"
+    }
+    
+    
+}
+
+else {
+    
+}
+
+suggestionbuttonIII.addEventListener('click', () => {
+    suggestionIII.style.display = "none"
+    
+    document.cookie = "segundaentrada=yes"
+    });
+
+
+window.addEventListener('error', () => {
+    suggestionIV.style.display = "block"
+});
+
+suggestionbuttonIV.addEventListener('click', () => {
+    suggestionIV.style.display = "none"
+    });
+
+  suggestionbuttonV.addEventListener('click', () => {
+    suggestionV.style.display = "none"
+    });
+
+
+    </script>
+    
+   <!-- Script para Botões do Menu Opções-->
+    
+    <script>
+        const optionI = document.getElementById('optionI');
+        if (getCookie('optionIdisponible') == "yes") {
+       if (getCookie('optionI') == "yes") {document.getElementById('hh').style.display = "none"
+       
+       optionI.innerHTML = "Ativar Gif de Carregamento"}
+       
+       else {
+           optionI.innerHTML = "Desativar Gif de Carregamento"
+       }
+        optionI.addEventListener('click', () => {
+            if (getCookie('optionI') == "yes") {deleteCookie('optionI')
+            
+            optionI.innerHTML = "Espere um Pouco..."
+            window.location.href = 'index.html'
+       }
+       else {
+           document.cookie = "optionI=yes"
+           
+           optionI.innerHTML = "Espere um Pouco..."
+           window.location.href = 'index.html'
+       }
+        });
+        }
+        else {
+            optionI.innerHTML = "Você precisa do Plus para habilitar essa Função" 
+        }
+        
+        
+        
+        
+        // Captura os elementos uma única vez (Performance!)
+const botoes = document.querySelectorAll('button');
+const iframes = document.querySelectorAll('iframe');
+const optionII = document.getElementById('optionII');
+
+if (getCookie('optionII') == "yes") {
+    // 1. Botões com borda simples
+    botoes.forEach(b => {
+        b.style.borderBottom = "1px solid blue";
+    });
+
+    // 2. Simplificar iframes
+    iframes.forEach(f => {
+        f.style.display = "block";
+        f.style.border = "1px solid #000";
+        f.style.boxShadow = "none";
+    });
+
+    // 3. Estilo Injetado (AGORA CORRIGIDO PARA A AJUDA)
+    let batataStyle = document.getElementById('potato-mode-css');
+    if (!batataStyle) {
+        batataStyle = document.createElement('style');
+        batataStyle.id = "potato-mode-css";
+        batataStyle.innerHTML = `
+            * {
+                font-family: Arial, sans-serif !important;
+                filter: none !important;
+                animation: none !important;
+                transition: none !important;
+                box-shadow: none !important;
+                text-shadow: none !important;
+                border-radius: 0px !important;
+            }
+            
+            /* Isso pega TODO elemento que tenha uma classe e arranca os detalhes */
+*[class] {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    background-image: none !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+    border-radius: 0px !important;
+    transition: none !important;
+}
+
+/* Isso garante que nem o que é padrão escape */
+button, div, section, h1, h2 {
+    box-shadow: none !important;
+    filter: none !important;
+}
+
+button {
+    border-bottom:1px solid blue;
+}
+
+            
+            /* Correção para a Aba de Ajuda */
+            .ajuda-box {
+                border-bottom: 1px solid black !important;
+                
+            }
+            
+            .btn-ajuda {
+                width: 50% !important; /* Garante que não quebre o layout */
+                height: 35px !important; /* Altura fixa para não bugar */
+                border: 1px solid blue !important;
+            }
+
+#abrirajuda,#fecharajuda {
+    border-bottom: 1px solid blue;
+}
+
+            .ajuda-header {
+                
+            }
+
+            iframe { 
+                contain: strict; 
+                background: #000;
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+
+        `
+        document.head.appendChild(batataStyle);
+        
+        
+    
+    optionII.innerHTML = "Ativar Detalhes";
+}
+
+} else {
+    // Modo Normal
+    const styleParaRemover = document.getElementById('potato-mode-css');
+    if (styleParaRemover) styleParaRemover.remove();
+    
+    botoes.forEach(b => { b.style.borderBottom = ""; });
+    optionII.innerHTML = "Desativar Detalhes";
+}
+
+
+        optionII.addEventListener('click', () => {
+            if (getCookie('optionII') == "yes") {deleteCookie('optionII')
+            
+            optionII.innerHTML = "Espere um Pouco..."
+            window.location.href = 'index.html'
+       }
+       else {
+           document.cookie = "optionII=yes"
+           
+           optionII.innerHTML = "Espere um Pouco..."
+           window.location.href = 'index.html'
+       }
+        });
+        
+        function limparTodosOsCookies() {
+    // 1. Pega todos os cookies e separa por ';'
+    const cookies = document.cookie.split(";");
+
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const eqPos = cookie.indexOf("=");
+        // 2. Pega o nome do cookie (removendo espaços vazios)
+        const nome = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        
+        // 3. Define o cookie com uma data de expiração no passado
+        // Isso força o navegador a deletá-lo imediatamente
+        document.cookie = nome.trim() + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+    }
+    
+    console.log("Cookies limpos!");
+}
+
+        
+        const optionIII = document.getElementById('optionIII');
+        
+       //Uso recomendado para Devs que querem Testar Salvamento de Dados (Sensível)
+        optionIII.addEventListener('click', () => {limparTodosOsCookies()
+         optionIII.innerHTML = "Deletando Dados de Navegação..."
+         window.location.href = "index.html"
+         });
+         
+         
+         
+         const optionV = document.getElementById('optionV');
+         
+         if (getCookie('optionV') == "yes") {
+             optionV.innerHTML = "Desativar Escaneamento de Rede automático"
+             
+             optionV.addEventListener('click', () => {deleteCookie('optionV');
+       optionV.innerHTML = "Aplicando..."
+       
+       window.location.href = "index.html"});
+         }
+         
+         else {
+         if (getCookie('optionVdisponible') == "yes") {
+             optionV.innerHTML = "Ativar Escaneamento de Rede automático"
+             
+             optionV.addEventListener('click', () => {document.cookie = "optionV=yes"
+       optionV.innerHTML = "Aplicando..."
+       
+       window.location.href = "index.html"});
+       
+       
+         }
+         
+         else {
+             optionV.innerHTML = "Você precisa do Plus para habilitar essa Função"
+         }
+         }
+         
+         
+         
+         
+         
+         
+         
+         
+         const optionVI = document.getElementById('optionVI');
+         
+         if (getCookie('optionVI') == "yes") {
+             optionVI.innerHTML = "Ativar Escaneamento de informações"
+             
+             optionVI.addEventListener('click', () => {deleteCookie('optionVI');
+       optionVI.innerHTML = "Aplicando..."
+       
+       window.location.href = "index.html"});
+         }
+         
+         else {
+             optionVI.innerHTML = "Desativar Escaneamento de informações"
+             
+             optionVI.addEventListener('click', () => {document.cookie = "optionVI=yes"
+       optionVI.innerHTML = "Aplicando..."
+       
+       window.location.href = "index.html"});       
+       
+       
+         }
+         
+    </script> 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <style>
+    .ajuda-box {
+        border: 1px solid black;
+        max-width: 250px; /* Tamanho similar ao seu suggestion */
+        max-height: 250px;
+        background: white;
+        margin: 20px auto;
+        border-bottom: 3px solid black;
+        font-family: "Oxygen", sans-serif;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        right: 0px;
+        top: 10px;
+        display: none;
+        overflow-y: auto;
+    }
+
+    .ajuda-header {
+        background: #eee;
+        padding: 5px;
+        border-bottom: 1px solid black;
+        font-weight: bold;
+        text-align: center;
+        font-size: 0.9em;
+    }
+
+    /* Área onde os botões ficam */
+    .ajuda-nav {
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: 5px;
+        background: #f9f9f9;
+        
+    }
+    
+    .btn-ajuda {
+        width: 50%;
+    }
+
+   
+    /* Área do texto explicativo */
+    .ajuda-corpo {
+        padding: 10px;
+        font-size: 0.85em;
+        color: #333;
+        line-height: 1.2;
+    }
+
+    .ajuda-corpo h4 {
+        margin-bottom: 5px;
+        color: blue;
+    }
+</style>
+
+<div class="ajuda-box" id="ajudabox">
+    <div class="ajuda-header">Central de Suporte Rápido</div>
+    
+    <div class="ajuda-nav">
+        <button class="btn-ajuda" onclick="trocarAjuda('erromcpack')">Erro na Extensão do Arquivo</button>
+        <button class="btn-ajuda" onclick="trocarAjuda('site')">Problemas de Desempenho</button>
+        <button class="btn-ajuda" onclick="trocarAjuda('ads')">Remover Anúncios</button>
+        <button class="btn-ajuda" onclick="trocarAjuda('import')">Importar para o Minecraft</button>
+        <button class="btn-ajuda" onclick="trocarAjuda('errodedowloadnatextura')">Botão de Dowload não funciona</button>
+    </div>
+
+    <div class="ajuda-corpo" id="texto-ajuda">
+        <h4>Olá!</h4>
+        Clique em um dos botões acima para resolver seu problema rapidamente. Se seu problema não estiver nos botões acima, vá em Menu > Descrever um problema
+    </div>
+</div>
+
+<button id="abrirajuda" style="position: fixed; right: 0px; top: 0px; width: 30px; height: 30px;">?</button>
+
+<button id="fecharajuda" style="position: fixed; right: 0px; top: 0px; width: 30px; height: 30px; display: none;">X</button>
+
+<button id="abrirscanner" style="position: fixed; right: 30px; top: 0px; width: 60px; height: 30px; font-size: 10px;">Abrir Scanner</button>
+
+<button id="fecharscanner" style="position: fixed; right: 30px; top: 0px; width: 60px; height: 30px; display: none; font-size: 10px;">Fechar Scanner</button>
+
+<!--Script para Ajuda Rápida-->
+
+<script>
+    function trocarAjuda(tipo) {
+        const display = document.getElementById('texto-ajuda');
+        
+        // Banco de dados de textos (super leve)
+        const guias = {
+            'erromcpack': '<h4>Erro na extensão do arquivo</h4>Se o arquivo não abrir, renomeie tirando o <b>.zip</b> do final (se houver) e deixe apenas <b>.mcpack</b>',
+            'site': '<h4>Problemas de Desempenho no Dispositivo?</h4>Vá em Menu > Opções > <b>Ativar/Desativar Detalhes</b> e Desative. Isso ajuda muito celulares fracos',
+            'ads': '<h4>Remover Anúncios</h4>Fique logado na página por 5 minutos sem fechar. O contador mostra seu progresso',
+            'import': '<h4>Como Importar o Arquivo para o Minecraft</h4>Use o <b>CX Explorer</b>. Conceda Permissão aos arquivos, Clique no arquivo e escolha "Abrir com Minecraft"',
+            'errodedowloadnatextura': '<h4>O Botão de Dowload não funciona</h4>Se o Botão de <b>Dowload</b> não funciona, seu Navegador pode não Suportar a opção de Dowload. Tente usar Navegadores como o Chrome. e, se mesmo assim não funcionar, por favor <b>Descreva um Problema</b>'
+        };
+
+        // Aplica o texto baseado no botão clicado
+        display.innerHTML = guias[tipo] || 'Selecione uma opção';
+    }
+    
+    const abrirajuda = document.getElementById('abrirajuda')
+    
+    const fecharajuda = document.getElementById('fecharajuda')
+    
+    const ajudabox = document.getElementById('ajudabox')
+    
+    abrirajuda.addEventListener('click', () => {
+        ajudabox.style.display = "block"
+        abrirajuda.style.display = "none"
+        fecharajuda.style.display = "block"
+    });
+    
+    fecharajuda.addEventListener('click', () => {
+        ajudabox.style.display = "none"
+        abrirajuda.style.display = "block"
+        fecharajuda.style.display = "none"
+    });
+    
+    
+</script>
+
+
+
+
+
+
+<!--Radar de Conexão-->
+
+<script>
+    (function() {
+        let lastTime = performance.now();
+        let frames = 0;
+        let baixosSeguidos = 0;
+        let alertaDisparado = false;
+
+        function checarFPS() {
+            let now = performance.now();
+            frames++;
+            
+            if (now >= lastTime + 1000) {
+                let fps = frames;
+                frames = 0;
+                lastTime = now;
+
+                // Debug para ver no console
+                
+
+                if (fps < 20) { 
+                    baixosSeguidos++; 
+                } else { 
+                    baixosSeguidos = 0; 
+                }
+
+                if (baixosSeguidos >= 3 && !alertaDisparado) {
+                    const aviso = document.getElementById('suggestionV'); // Use o V que é o de desempenho
+                    
+                        if (aviso) { aviso.style.display = "block"; }
+                    
+                    alertaDisparado = true;
+                }
+            }
+            requestAnimationFrame(checarFPS);
+        }
+        
+        // Espera 5 segundos para estabilizar e começa a checar
+        setTimeout(() => { requestAnimationFrame(checarFPS); }, 20000);
+    })(); // Fechamento da função imediata corrigido
+
+</script>
+
+<div id="radarMbps" style="border: 1px solid blue; padding: 15px; width: 220px; margin: 10px auto; text-align: center; position: fixed; top: 20px; right: 0px; background: white; z-index: 999999999999999999999;">
+    <div style="font-size: 9px; margin-bottom: 10px; text-align: left; letter-spacing: 1px;">Verificador de Conexão<br><br>
+    Info: Escaneie apanas quando o Site estiver Carregado, porquê a Medição vai ser Instável</div>
+    
+    <button id="barrasStatus" onclick="executarTesteManual()" style="display: block; margin: 0 auto; font-size: 22px; cursor: pointer; width: 100%; padding: 5px 0; font-family: monospace;">
+        ░░░░░
+    </button>
+    
+    <div id="valorMbps" style="font-size: 14px; font-weight: bold; margin: 10px 0;">0.0 Mbps</div>
+    
+    <div id="msgRede" style="font-size: 9px; color: #888;">Aguardando...</div>
+</div>
+
+
+<script>
+    async function calcularMbpsReal() {
+        const displayBotao = document.getElementById('barrasStatus');
+        const displayValor = document.getElementById('valorMbps');
+        const displayMsg = document.getElementById('msgRede');
+        const box = document.getElementById('radarMbps');
+
+        // Efeito visual de carregando no botão
+        displayBotao.innerText = " . . . ";
+        displayMsg.innerText = "Verificando a Conexão...";
+        
+        const imagemTeste = "18689.gif?cache=" + Math.random();
+        const tamanhoArquivoBits = 50000 * 8; 
+        const tempoInicio = performance.now();
+
+        try {
+            await fetch(imagemTeste, { cache: "no-store" });
+            const tempoFim = performance.now();
+            const duracaoSegundos = (tempoFim - tempoInicio) / 1000;
+            const bps = tamanhoArquivoBits / duracaoSegundos;
+            const mbps = (bps / 1000000).toFixed(1);
+
+            let icones = ""; let cor = ""; let rotulo = "";
+
+            if (mbps >= 10) { icones = "█████"; rotulo = "Conexão Perfeita"; }
+            else if (mbps >= 5) { icones = "████░"; rotulo = "Ótima Conexão"; }
+            else if (mbps >= 3) { icones = "███░░"; rotulo = "Aceitável"; }
+            else if (mbps >= 1.5) { icones = "██░░░"; rotulo = "Conexão fraca"; }
+            else { icones = "█░░░░"; rotulo = "Conexão Extremamente fraca"; }
+
+            // Atualiza o texto DENTRO do botão
+            displayBotao.innerText = icones;
+            displayBotao.style.color = cor;
+            displayBotao.style.borderColor = cor;
+            
+            displayValor.innerText = mbps + " Mbps";
+            displayValor.style.color = cor;
+            displayMsg.innerText = rotulo;
+            box.style.borderColor = cor;
+
+        } catch (erro) {
+            displayMsg.innerText = "Erro de Conexão";
+            displayBotao.innerText = "Erro";
+        }
+    }
+
+    function executarTesteManual() {
+        calcularMbpsReal();
+    }
+
+    function gerenciarMonitorDeRede() {
+        const btnManual = document.getElementById('barrasStatus');
+        
+        if (getCookie('optionV') == "yes") {
+            // No automático, o botão apenas mostra o status, mas ainda pode ser clicado
+            setInterval(calcularMbpsReal, 10000);
+            calcularMbpsReal();
+        } else {
+            document.getElementById('msgRede').innerText = "Clique nas barras";
+        }
+    }
+
+    window.addEventListener('load', gerenciarMonitorDeRede);
+</script>
+
+<!--Script para Abrir e Fechar o Scanner-->
+
+<script>
+    const abrirscanner = document.getElementById('abrirscanner')
+    
+    const fecharscanner = document.getElementById('fecharscanner')
+    
+    const radarMbps = document.getElementById('radarMbps')
+    
+    radarMbps.style.display = "none"
+    
+    abrirscanner.addEventListener('click', () => {
+        radarMbps.style.display = "block"
+        abrirscanner.style.display = "none"
+        fecharscanner.style.display = "block"
+    });
+    
+    fecharscanner.addEventListener('click', () => {
+        radarMbps.style.display = "none" 
+        
+        abrirscanner.style.display = "block"
+        fecharscanner.style.display = "none"
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="containerLag" style="background: white; border: 2px solid blue; padding: 15px; width: 160px; text-align: center; margin: 10px auto; border-bottom: 3px solid blue; position: fixed; right: 60px; top: 20px;">
+    
+    <div style="margin-bottom: 5px;">
+        <span id="txtFps" style="font-size: 28px; font-weight: 700; color: black;">...</span>
+        <span style="font-size: 10px; color: black; text-transform: uppercase; font-weight: bold;"> FPS</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 2px;">
+        <div id="statusLabel" style="font-size: 11px; color: black; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Carregando...</div>
+        
+        <div style="border-top: 1px solid black; margin-top: 8px; padding-top: 8px;">
+            <div style="font-size: 9px; color: black; font-weight: bold;">Delay de Tempo</div>
+            <div id="txtMs" style="font-size: 15px; color: black; font-weight: 400;">0ms</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    if (getCookie('optionVI') != "yes") {
+    
+(function() {
+    let frameCount = 0;
+    let lastTime = performance.now();
+    
+    const txtFps = document.getElementById('txtFps');
+    const txtMs = document.getElementById('txtMs');
+    const label = document.getElementById('statusLabel');
+
+    function countFrames() {
+        frameCount++;
+        requestAnimationFrame(countFrames);
+    }
+    requestAnimationFrame(countFrames);
+
+    // Atualização a cada 1 segundo para evitar lag no Moto E22
+    setInterval(() => {
+        const now = performance.now();
+        const duration = now - lastTime;
+        const fps = Math.round((frameCount * 1000) / duration);
+        const msPerFrame = (duration / frameCount).toFixed(1);
+
+        frameCount = 0;
+        lastTime = now;
+
+        txtFps.innerText = fps;
+        txtMs.innerText = msPerFrame + "ms";
+
+        // Lógica de Cores baseada na performance
+        let cor = "black"; 
+        let msg = "Isso é Incrível!";
+        if (fps < 120) { 
+            cor = "black"; 
+            msg = "Ótimo Desempenho";
+        }
+        if (fps < 95) { 
+            cor = "black"; 
+            msg = "Muito Suave";
+        }
+        if (fps < 75) { 
+            cor = "black"; 
+            msg = "Suave";
+        }
+        if (fps < 60) { 
+            cor = "black"; 
+            msg = "Perfeito!";
+        }
+        if (fps < 50) { 
+            cor = "black"; 
+            msg = "Bom";
+        }
+        if (fps < 38) { 
+            cor = "black"; 
+            msg = "Instável";
+        }
+        if (fps < 20) { 
+            cor = "black"; 
+            msg = "Desempenho Crítico";
+        }
+
+        label.style.color = cor;
+        label.innerText = msg;
+        txtFps.style.color = (fps < 30) ? "black" : "black";
+
+    }, 1000); 
+})();
+}
+</script>
+
+
+
+<button id="abririnfo" style="position: fixed; right: 90px; top: 0px; width: 60px; height: 30px; font-size: 10px;">Abrir Info</button>
+
+<button id="fecharinfo" style="position: fixed; right: 90px; top: 0px; width: 60px; height: 30px; display: none; font-size: 10px;">Fechar Info</button>
+
+<script>
+    const abririnfo = document.getElementById('abririnfo')
+    
+    const fecharinfo = document.getElementById('fecharinfo')
+    
+    const containerlag = document.getElementById('containerLag')
+    
+    containerlag.style.display = "none"
+    
+    abririnfo.addEventListener('click', () => {
+        containerlag.style.display = "block"
+        abririnfo.style.display = "none"
+        fecharinfo.style.display = "block"
+    });
+    
+    fecharinfo.addEventListener('click', () => {
+        containerlag.style.display = "none" 
+        
+        abririnfo.style.display = "block"
+        fecharinfo.style.display = "none"
+    });
+</script>
+
+<style>
+  
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Estilo dos Cards de Planos-->
+
+<style>
+  .card-3d {
+    width: 300px;
+    height: 150px;
+    perspective: 1000px;
+  }
+  .card-inner {
+    width: 100%;
+    height: 100%;
+    
+    
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+  .card-3d:hover .card-inner {
+    transform: rotateY(180deg);
+  }
+  .frente, .verso {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column; /* Isso faz o texto quebrar em linhas */
+    align-items: center;
+    justify-content: flex-start;
+    
+    border: 1px solid blue;
+    background: white;
+    text-align: center;
+    padding: 0px;
+    overflow-y: auto;
+    box-sizing: border-box;
+  }
+  .verso {
+    
+    transform: rotateY(180deg);
+  }
+  
+  @media (max-width: 500px) {
+      .card-3dd {
+    display: flex;
+    flex-direction: column; /* Coloca um em cima do outro */
+    align-items: center;    /* Alinha no centro da largura */
+    justify-content: center;/* Alinha no centro da altura se necessário */
+    width: 100%;            /* Garante que ocupa a largura total da tela */
+    gap: 10px;              /* Espaço entre os cards sem precisar de <br> */
+    margin-top: 20px;
+}
+
+/* Ajuste para o card não esticar demais */
+.card-3d {
+    margin: 0 auto; 
+    display: block;
+}
+
+  }
+</style>
+<div class="card-3dd">
+<div class="card-3d">
+  <div class="card-inner">
+    <div class="frente">
+      <h1>Advanced</h1>
+      <span>Clique aqui para ver os Benefícios e Obter</span>
+    </div>
+    <div class="verso">
+        <h1>Advanced</h1>
+      <ul>
+  <li>Texturas Disponíveis na Versão Beta</li>
+  <li>Anúncios Removidos</li>
+</ul>
+<h3 id="advancedh">600 Segundos Totais no Site para Desbloquear</h3>
+
+    </div>
+  </div>
+</div>
+</div><br>
+
+<div class="card-3d">
+  <div class="card-inner">
+    <div class="frente">
+      <h1>Plus</h1>
+      <span>Clique aqui para ver os Benefícios e Obter</span>
+    </div>
+    <div class="verso">
+        <h1>Plus</h1>
+      <ul>
+  <li>Texturas Disponíveis na Versão Pré-Alpha</li>
+  <li>Anúncios Removidos</li>
+  <li>Opções Avançadas disponíveis</li>
+  <li>Aba de Leitura Desbloqueada</li>
+</ul>
+<h3 id="plush">1200 Segundos Totais no Site para Desbloquear</h3>
+    </div>
+  </div>
+</div>
+
+<h3 id="dd"></h3>
+
+<!--Script para Benefícios Plus e Advanced-->
+
+<script>
+     const elementoss = document.querySelectorAll('[id="abadeleitura"]');
+
+elementoss.forEach(el => {
+  el.style.display = "none"
+});
+
+    
+    
+    
+    if (getCookie('abadeleitura') == "yes") {
+    const elementos = document.querySelectorAll('[id="abadeleitura"]');
+
+elementos.forEach(el => {
+  el.style.display = "block"
+});
+
+}
+    
+    const dd = document.getElementById('dd')
+    
+    const plush = document.getElementById('plush')
+    
+    const advancedh = document.getElementById('advancedh')
+    
+   // 1. Pega o valor atual logo que o site abre
+var tempoparse = parseInt(getCookie('temponosite')) || 0;
+
+// 2. O intervalo chama a função a cada 1 segundo
+setInterval(setTimer, 1000);
+
+function setTimer() {
+    // 3. ATUALIZA a variável (soma 1 ao valor antigo)
+    tempoparse = tempoparse + 1;
+
+    // 4. SALVA no cookie sem nada de path ou idade (puro)
+    document.cookie = "temponosite=" + tempoparse;
+
+    // 5. Só pra tu ver no console se tá subindo
+    dd.innerHTML = `Tempo Total no Site: ${tempoparse}`;
+
+    // Lógica dos 10 e 20 minutos
+    
+    if (tempoparse == 1200) { 
+    document.cookie = "abadeleitura=yes"
+    document.cookie = "optionIdisponible=yes"
+    document.cookie = "optionVdisponible=yes"
+    plush.innerHTML = "Desbloqueado"
+    window.location.href = "index.html"
+    
+     }
+     if (tempoparse == 600) { 
+    advancedh.innerHTML = "Desbloqueado"
+    document.cookie = 'noads=yes'
+    window.location.href = "index.html"
+    }
+}
+
+if (tempoparse >= 1200) { 
+    plush.innerHTML = "Desbloqueado"
+    
+     }
+     if (tempoparse >= 600) { 
+    advancedh.innerHTML = "Desbloqueado"
+    }
+
+
+
+</script>
+
+
+
+
+
+
+<!--Pop-up Primeira Entrada-->
+
+<div style="border: 1px solid blue; position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 999999999999999999999; max-width: 250px; width: 100%; min-width: 20px; height: 300px; text-align: center; background: white; overflow-y: auto;" id="firstentered">
+    <h2>Seja bem-vindo(a) a</h2>
+    <h3>Biblioteca de Texturas e Addons Criados por ianzinbrazil</h3>
+    <p>Um lugar onde todos os meus Projetos de Minecraft estão. Sempre está sendo Atualizado para você ter a Melhor Experiência</p>
+    <button id="firstenteredbutton" style="max-width: 200px; width: 100%; min-width: 20px;">Começar</button>
+</div>
+
+<script>
+    const firstentered = document.getElementById('firstentered');
+       const firstenteredbutton = document.getElementById('firstenteredbutton');
+    
+    firstentered.style.display = "none"
+    
+    if (getCookie('primeiraentrada') == "yes") {firstentered.style.display = "none"}
+    else {firstentered.style.display = "block"}
+    
+    firstenteredbutton.addEventListener('click', () => {
+        firstentered.style.display = "none"
+        document.cookie = "primeiraentrada=yes"
+    });
+</script>
