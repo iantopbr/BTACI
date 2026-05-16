@@ -2,6 +2,151 @@
 <html>
 <head>
     <meta charset="UTF-8">
+
+    <script>
+(function() {
+    let operacaoPendente = false;
+    let mapaEstadoDesejado = new Map();
+    let destinoAdiado = null;
+    let verificadorEmAndamento = false;
+
+    // Captura o domínio exato do seu GitHub Pages para garantir as deleções
+    const pathPadrao = "; path=/; domain=" + window.location.hostname;
+
+    // 1. INTERCEPTADOR GLOBAL DO DOCUMENT.COOKIE
+    const descritorCookie = Object.getOwnPropertyDescriptor(Document.prototype, 'cookie') || 
+                            Object.getOwnPropertyDescriptor(HTMLDocument.prototype, 'cookie');
+
+    if (descritorCookie && descritorCookie.set) {
+        Object.defineProperty(document, 'cookie', {
+            configurable: true,
+            enumerable: true,
+            get: function() {
+                return descritorCookie.get.call(document);
+            },
+            set: function(valorBruto) {
+                let partes = valorBruto.split(';');
+                let parChaveValor = partes.split('=');
+                
+                if (parChaveValor.length > 0) {
+                    let nome = parChaveValor.trim();
+                    let valor = parChaveValor.slice(1).join('=').trim();
+                    
+                    let textoBrutoMinusculo = valorBruto.toLowerCase();
+                    let ehDelecao = textoBrutoMinusculo.includes('expires=thu, 01 jan 1970') || 
+                                    textoBrutoMinusculo.includes('max-age=-') || 
+                                    textoBrutoMinusculo.includes('max-age=0');
+
+                    if (ehDelecao) {
+                        mapaEstadoDesejado.set(nome, null);
+                        // Força o Chrome do GitHub a entender a deleção aplicando o domínio correto
+                        descritorCookie.set.call(document, nome + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + pathPadrao);
+                    } else {
+                        mapaEstadoDesejado.set(nome, decodeURIComponent(valor));
+                    }
+                    
+                    operacaoPendente = true;
+                }
+                
+                descritorCookie.set.call(document, valorBruto);
+            }
+        });
+    }
+
+    // 2. LOOP DE VALIDAÇÃO COM AGRESSIVIDADE PARA O CHROME
+    function validarMemoriaERedirecionar() {
+        if (verificadorEmAndamento) return;
+        verificadorEmAndamento = true;
+
+        let tudoSincronizado = true;
+        let cookiesAtuais = document.cookie.split(';').reduce((acc, c) => {
+            let p = c.split('=');
+            if (p.length > 0 && p.trim() !== "") {
+                acc[p.trim()] = decodeURIComponent(p.slice(1).join('=').trim());
+            }
+            return acc;
+        }, {});
+
+        for (let [nome, valorDesejado] of mapaEstadoDesejado) {
+            if (valorDesejado === null) {
+                if (cookiesAtuais.hasOwnProperty(nome)) {
+                    tudoSincronizado = false;
+                    break;
+                }
+            } else {
+                if (!cookiesAtuais.hasOwnProperty(nome) || cookiesAtuais[nome] !== valorDesejado) {
+                    tudoSincronizado = false;
+                    break;
+                }
+            }
+        }
+
+        if (tudoSincronizado && destinoAdiado) {
+            operacaoPendente = false;
+            mapaEstadoDesejado.clear();
+            let url = destinoAdiado;
+            destinoAdiado = null;
+            window.location.href = url;
+        } else {
+            verificadorEmAndamento = false;
+            // Se o Chrome tentar cortar o processo, forçamos uma micro-espera ativa de 10ms antes do próximo frame
+            let start = Date.now();
+            while (Date.now() - start < 10) {} 
+            setTimeout(validarMemoriaERedirecionar, 15);
+        }
+    }
+
+    // 3. BLOQUEIO DE DESCARREGAMENTO (ANTI-CHROME)
+    // Se o Chrome tentar mudar de página à força enquanto grava, isso avisa o navegador para esperar
+    window.addEventListener('beforeunload', function (e) {
+        if (operacaoPendente && destinoAdiado) {
+            e.preventDefault();
+            e.returnValue = '';
+        }
+    });
+
+    // 4. INTERCEPTADORES DE WINDOW.LOCATION
+    Object.defineProperty(window.location, 'href_bloqueador', {
+        configurable: true,
+        set: function(url) {
+            if (operacaoPendente) {
+                destinoAdiado = url;
+                validarMemoriaERedirecionar();
+            } else {
+                window.location.assign(url);
+            }
+        }
+    });
+
+    const originalReplace = window.location.replace;
+    window.location.replace = function(url) {
+        if (operacaoPendente) {
+            destinoAdiado = url;
+            validarMemoriaERedirecionar();
+        } else {
+            originalReplace.call(window.location, url);
+        }
+    };
+
+    window.mudarDePaginaSeguro = function(url) {
+        if (operacaoPendente) {
+            destinoAdiado = url;
+            validarMemoriaERedirecionar();
+        } else {
+            window.location.href = url;
+        }
+    };
+
+    setInterval(() => {
+        if (!destinoAdiado && operacaoPendente) {
+            operacaoPendente = false;
+            mapaEstadoDesejado.clear();
+        }
+    }, 1500);
+
+})();
+            </script>
+    
     
     <!--Função para Limpar todos os Cookies do Site (Usar no Console)-->
     
